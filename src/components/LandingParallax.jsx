@@ -1,20 +1,24 @@
 /* eslint no-use-before-define: 0 */
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
+import dynamic from "next/dynamic";
 import { makeStyles } from "@material-ui/core/styles";
 // import { withStyles } from '@mui/material/styles';
 // import { makeStyles } from '@mui/styles';
-import ProductDescription from "../components/ProductDescription.jsx";
-import WorkWithUs from "../components/WorkWithUs.jsx";
+import ProductDescription from "./ProductDescription.jsx";
+import WorkWithUs from "./WorkWithUs.jsx";
 // import CustomFileUpload from "./CustomFileUpload.tsx";
-import ParticlesBg from "particles-bg";
+const ParticlesBg = dynamic(() => import("particles-bg"), { ssr: false });
 
 // Third Party components from https://www.creative-tim.com/
 import GridContainer from "../material-ui-assets/components/Grid/GridContainer.js";
 import GridItem from "../material-ui-assets/components/Grid/GridItem.js";
 import Button from "@material-ui/core/Button";
 // import Button from "../material-ui-assets/components/CustomButtons/Button.js";
-import Parallax from "../material-ui-assets/components/Parallax/Parallax.js";
+const Parallax = dynamic(
+    () => import("../material-ui-assets/components/Parallax/Parallax.js"),
+    { ssr: false }
+);
 // Third party styles from https://www.creative-tim.com/
 import styles from "../material-ui-assets/jss/material-kit-react/views/landingPage.js";
 // import Snackbar from '@mui/material/Snackbar';
@@ -23,7 +27,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 // import { setEmailStatusFlag, sendEmail } from "../components/Actions.jsx";
 import TextLoop from "react-text-loop";
-import AppAppBar from "../components/AppAppBar.jsx";
+import AppAppBar from "./AppAppBar.jsx";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -32,11 +36,11 @@ import DialogActions from "@material-ui/core/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import { InlineWidget } from "react-calendly";
 import emailjs from '@emailjs/browser';
-import Highlights from "../components/Highlights.jsx";
-import Faq from "../components/Faq.jsx";
-import Footer from "../components/Footer.jsx";
-import Consultation from "../components/Consultation.jsx";
-import Brands from "../components/Brands.jsx";
+import Highlights from "./Highlights.jsx";
+import Faq from "./Faq.jsx";
+import Footer from "./Footer.jsx";
+import Consultation from "./Consultation.jsx";
+import Brands from "./Brands.jsx";
 const useStyles = makeStyles(theme => ({
     ...styles,
     dialogCustom: {

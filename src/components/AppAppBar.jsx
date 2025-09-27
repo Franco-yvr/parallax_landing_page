@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
@@ -118,21 +118,13 @@ function AppAppBar({ mode, toggleColorMode }) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [appBarOpacity, setAppBarOpacity] = React.useState(1);
-    const navigate = useNavigate();
+    const router = useRouter();
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
 
     const scrollToSection = (sectionId) => {
-        if (window.location.pathname !== '/') {
-            navigate('/');
-            // Wait for navigation to complete before scrolling
-            setTimeout(doScroll, 100);
-        } else {
-            doScroll();
-        }
-
         function doScroll() {
             const sectionElement = document.getElementById(sectionId);
             if (sectionElement) {
@@ -151,7 +143,15 @@ function AppAppBar({ mode, toggleColorMode }) {
                 console.log('Element not found:', sectionId);
             }
         }
-        
+
+        if (router.pathname !== '/') {
+            router.push('/').then(() => {
+                setTimeout(doScroll, 100);
+            });
+        } else {
+            doScroll();
+        }
+
         setOpen(false);
     };
 
@@ -173,7 +173,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                     style={{ opacity: appBarOpacity, transition: 'opacity 0.3s' }}
                 >
                     <Box className={classes.navContainer}>
-                        <Box onClick={() => navigate('/')} className={classes.navIcon}>
+                        <Box onClick={() => router.push('/')} className={classes.navIcon}>
                             {/* <Sitemark /> */}
                             <span className={classes.brandName}>TensorGeeks</span>
                         </Box>
@@ -235,7 +235,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                             <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
                                 <Box className={classes.drawerContainer}>
                                     <Box className={classes.drawerHeader}>
-                                        <Box onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+                                        <Box onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
                                             {/* <Sitemark /> */}
                                         </Box>
                                         <IconButton onClick={toggleDrawer(false)}>
@@ -857,4 +857,3 @@ export default AppAppBar;
 // };
 
 // export default AppAppBar;
-

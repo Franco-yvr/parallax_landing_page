@@ -3,9 +3,9 @@
   "version": "5.0.0",
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -18,14 +18,11 @@
     "marked": "^15.0.7",
     "particles-bg": "^2.5.5",
     "prop-types": "^15.8.1",
-    "react": "^17.0.2",
+    "next": "^13.5.7",
+    "react": "^18.2.0",
     "react-calendly": "^4.3.1",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^6.26.0",
+    "react-dom": "^18.2.0",
     "react-text-loop": "^2.3.0"
   },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^1.3.0",
-    "vite": "^2.9.15"
-  }
+  "devDependencies": {}
 }

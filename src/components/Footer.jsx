@@ -33,6 +33,19 @@ export default function Footer() {
     const [successOpen, setSuccessOpen] = React.useState(false);
     const [validEmailOpen, setValidEmailOpen] = React.useState(false);
     const [validFormOpen, setValidFormOpen] = React.useState(false);
+    const [viewportWidth, setViewportWidth] = React.useState(() =>
+        typeof window === 'undefined' ? 1024 : window.innerWidth
+    );
+
+    React.useEffect(() => {
+        const handleResize = () => setViewportWidth(window.innerWidth);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const isTabletDown = viewportWidth < 960;
+    const isPhone = viewportWidth < 600;
     const sendEmail = (e) => {
         e.preventDefault();
         if (!email.match("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$")) {
@@ -66,13 +79,13 @@ export default function Footer() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 padding: '64px 0',
-                textAlign: window.innerWidth < 960 ? 'center' : 'left',
+                textAlign: isTabletDown ? 'center' : 'left',
             }}
         >
             <Box
                 style={{
                     display: 'flex',
-                    flexDirection: window.innerWidth < 600 ? 'column' : 'row',
+                    flexDirection: isPhone ? 'column' : 'row',
                     width: '100%',
                     justifyContent: 'space-between',
                 }}
@@ -82,11 +95,11 @@ export default function Footer() {
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '32px',
-                        minWidth: window.innerWidth < 600 ? '100%' : '60%',
+                        minWidth: isPhone ? '100%' : '60%',
                     }}
                 >
                     <Box style={{ 
-                        width: window.innerWidth < 600 ? '100%' : '60%'
+                        width: isPhone ? '100%' : '60%'
                     }}>
                         {/* <SitemarkIcon /> */}
                         <Typography variant="h6" style={{ fontWeight: 600, marginTop: 16, color: '#000000' }}>
@@ -236,8 +249,8 @@ export default function Footer() {
                     gap: '8px',
                     justifyContent: 'left',
                     color: 'text.secondary',
-                    alignSelf: window.innerWidth < 600 ? 'center' : 'flex-start',
-                    marginTop: window.innerWidth < 600 ? '32px' : '0',
+                    alignSelf: isPhone ? 'center' : 'flex-start',
+                    marginTop: isPhone ? '32px' : '0',
                 }}
             >
                 {/* <IconButton
