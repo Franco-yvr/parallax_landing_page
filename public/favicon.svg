@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <style>
+    .text { font: bold 120px sans-serif; }
+  </style>
+  <circle cx="100" cy="100" r="95" stroke="#0A4A65" stroke-width="10" fill="none" />
+  <circle cx="100" cy="100" r="82" stroke="#014B7A" stroke-width="8" fill="none" />
+  <circle cx="100" cy="100" r="44" fill="none" stroke="#" stroke-width="4"/>
+    <text x="43" y="147" stroke="#0A4A65" fill="#0A4A65" class="text" fill="teal">W</text>
+</svg>
